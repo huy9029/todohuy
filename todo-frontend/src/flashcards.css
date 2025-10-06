@@ -1,0 +1,200 @@
+.flashcard-container {
+  text-align: center;
+  padding: 20px;
+  min-height: 100vh;
+  transition: background 0.4s, color 0.4s;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.theme-toggle {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.theme-toggle:hover {
+  opacity: 0.8;
+}
+
+.add-card {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-card input {
+  padding: 8px 10px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text);
+}
+
+.add-card button {
+  padding: 8px 14px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.add-card button:hover {
+  opacity: 0.9;
+}
+
+/* Card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  justify-items: center;
+}
+
+.card {
+  width: 180px;
+  height: 200px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-bg);
+  color: var(--text);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background-color: var(--card-back);
+}
+
+.card-text {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.card-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3em;
+  margin: 0 5px;
+  transition: 0.3s;
+}
+
+.card-actions button:hover {
+  transform: scale(1.2);
+}
+
+/* Light / Dark mode */
+:root[data-theme='light'] {
+  --bg: #fdfdfd;
+  --text: #222;
+  --accent: #007bff;
+  --border: #ccc;
+  --card-bg: #ffffff;
+  --card-back: #f9f9f9;
+  --input-bg: #ffffff;
+}
+
+:root[data-theme='dark'] {
+  --bg: #1e1e1e;
+  --text: #eee;
+  --accent: #007bff;
+  --border: #444;
+  --card-bg: #2a2a2a;
+  --card-back: #333;
+  --input-bg: #2a2a2a;
+}
+
+[data-theme='light'],
+[data-theme='dark'] {
+  background: var(--bg);
+  color: var(--text);
+}
+/* --- Search row (top) --- */
+.header-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.search-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.search-input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border, #ccc);
+  width: 260px;
+  outline: none;
+  background: var(--input-bg, #fff);
+  color: var(--text, #111);
+}
+.search-input:focus {
+  box-shadow: 0 0 0 6px rgba(59,130,246,0.06);
+  border-color: #3b82f6;
+}
+
+.search-btn,
+.clear-btn {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background: var(--accent, #007bff);
+  color: white;
+}
+.clear-btn {
+  background: #6b7280;
+}
+.search-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+.clear-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+
+/* small responsive tweak */
+@media (max-width: 640px) {
+  .search-input { width: 140px; }
+  .header-right { flex-direction: column; gap: 8px; align-items: stretch; }
+}
